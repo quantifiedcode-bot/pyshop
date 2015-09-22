@@ -241,7 +241,7 @@ class User(Base):
         :rtype: :class:`pyshop.models.User`
 
         """
-        if not asbool(settings.get('pyshop.ldap.use_for_auth','False')):
+        if not asbool(settings.get('pyshop.ldap.use_for_auth', 'False')):
             return None
 
         if ldap is None:
@@ -284,7 +284,7 @@ class User(Base):
 
             filter_ = settings['pyshop.ldap.search_filter'].format(username=login)
             results = server.search_ext_s(settings['pyshop.ldap.bind_dn'],
-                                          getattr(ldap,"SCOPE_%s"%settings['pyshop.ldap.search_scope']),
+                                          getattr(ldap, "SCOPE_%s"%settings['pyshop.ldap.search_scope']),
                                           filter_)
             if results is None:
                 log.debug("LDAP rejected password for user %s" % (login))
@@ -313,7 +313,7 @@ class User(Base):
                 user_ldap.firstname = attrs[settings['pyshop.ldap.first_name_attr']][0]
                 user_ldap.lastname = attrs[settings['pyshop.ldap.last_name_attr']][0]
                 user_ldap.email =  attrs[settings['pyshop.ldap.email_attr']][0]
-                for groupname in ["developer","installer"]:
+                for groupname in ["developer", "installer"]:
                     user_ldap.groups.append(Group.by_name(session, groupname))
                 if user_ldap.validate(session):
                     session.add(user_ldap)

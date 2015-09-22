@@ -64,7 +64,7 @@ def authbasic(request):
     """
     Authentification basic, Upload pyshop repository access
     """
-    if len(request.environ.get('HTTP_AUTHORIZATION','')) > 0:
+    if len(request.environ.get('HTTP_AUTHORIZATION', '')) > 0:
         auth = request.environ.get('HTTP_AUTHORIZATION')
         scheme, data = auth.split(None, 1)
         assert scheme.lower() == 'basic'
