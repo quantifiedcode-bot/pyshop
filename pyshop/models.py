@@ -317,7 +317,7 @@ class User(Base):
                     user_ldap.groups.append(Group.by_name(session, groupname))
                 if user_ldap.validate(session):
                     session.add(user_ldap)
-                    log.debug('User "{}" added'.format(login))
+                    log.debug('User "{0}" added'.format(login))
                     transaction.commit()
             # its OK
             return user_ldap
